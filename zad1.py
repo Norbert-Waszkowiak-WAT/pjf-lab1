@@ -1,6 +1,6 @@
 import sys
 
-n = sys.argv[1]
+n = int(input("Enter a number: "))
 
 print('1')
 print('2')
