@@ -266,7 +266,7 @@ class TestZad9(unittest.TestCase):
         assert result == expected
 
 
-class TestZad10(unittest.TestCase):
+class TestZad0(unittest.TestCase):
 
     def test_0(self):
         head = Solution.ListNode(3, Solution.ListNode(2, Solution.ListNode(0, Solution.ListNode(-4))))
