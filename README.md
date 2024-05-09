@@ -13,4 +13,4 @@
 - _python -m unittest -k TestZad7_
 - _python -m unittest -k TestZad8_
 - _python -m unittest -k TestZad9_
-- _python -m unittest -k TestZad10_
+- _python -m unittest -k TestZad0_
