@@ -1,0 +1,120 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: TestZad1
+      id: testzad1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad1
+        setup-command: ''
+        command: python -m unittest -k TestZad1
+        timeout: 10
+        max-score: 10
+    - name: TestZad2
+      id: testzad2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad2
+        setup-command: ''
+        command: python -m unittest -k TestZad2
+        timeout: 10
+        max-score: 10
+    - name: TestZad3
+      id: testzad3
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad3
+        setup-command: ''
+        command: python -m unittest -k TestZad3
+        timeout: 10
+        max-score: 10
+    - name: TestZad4
+      id: testzad4
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad4
+        setup-command: ''
+        command: python -m unittest -k TestZad4
+        timeout: 10
+        max-score: 10
+    - name: TestZad5
+      id: testzad5
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad5
+        setup-command: ''
+        command: python -m unittest -k TestZad5
+        timeout: 10
+        max-score: 10
+    - name: TestZad6
+      id: testzad6
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad6
+        setup-command: ''
+        command: python -m unittest -k TestZad6
+        timeout: 10
+        max-score: 10
+    - name: TestZad7
+      id: testzad7
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad7
+        setup-command: ''
+        command: python -m unittest -k TestZad7
+        timeout: 10
+        max-score: 10
+    - name: TestZad8
+      id: testzad8
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad8
+        setup-command: ''
+        command: python -m unittest -k TestZad8
+        timeout: 10
+        max-score: 10
+    - name: TestZad9
+      id: testzad9
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad9
+        setup-command: ''
+        command: python -m unittest -k TestZad9
+        timeout: 10
+        max-score: 10
+    - name: TestZad10
+      id: testzad10
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: TestZad10
+        setup-command: ''
+        command: python -m unittest -k TestZad0
+        timeout: 10
+        max-score: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTZAD1_RESULTS: "${{steps.testzad1.outputs.result}}"
+        TESTZAD2_RESULTS: "${{steps.testzad2.outputs.result}}"
+        TESTZAD3_RESULTS: "${{steps.testzad3.outputs.result}}"
+        TESTZAD4_RESULTS: "${{steps.testzad4.outputs.result}}"
+        TESTZAD5_RESULTS: "${{steps.testzad5.outputs.result}}"
+        TESTZAD6_RESULTS: "${{steps.testzad6.outputs.result}}"
+        TESTZAD7_RESULTS: "${{steps.testzad7.outputs.result}}"
+        TESTZAD8_RESULTS: "${{steps.testzad8.outputs.result}}"
+        TESTZAD9_RESULTS: "${{steps.testzad9.outputs.result}}"
+        TESTZAD10_RESULTS: "${{steps.testzad10.outputs.result}}"
+      with:
+        runners: testzad1,testzad2,testzad3,testzad4,testzad5,testzad6,testzad7,testzad8,testzad9,testzad10
