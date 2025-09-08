@@ -294,3 +294,11 @@ class TestZad0(unittest.TestCase):
         expected = False
         result = Solution.linked_list_cycle(head)
         assert result == expected
+
+class TestZad1_Extra(unittest.TestCase):
+    def test_4(self):
+        # Sprawdzamy złożoną liczbę rzymską z kilkoma regułami odejmowania
+        s = "XLIX"  # 49 = 40 (XL) + 9 (IX)
+        expected = 49
+        result = Solution.romanToInt(s)
+        assert result == expected
