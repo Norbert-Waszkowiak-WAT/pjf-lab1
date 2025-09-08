@@ -294,3 +294,17 @@ class TestZad0(unittest.TestCase):
         expected = False
         result = Solution.linked_list_cycle(head)
         assert result == expected
+
+class TestAdditional(unittest.TestCase):
+
+    def test_11(self):
+        """Sprawdź, czy działa na małych literach."""
+        s = "mcmxciv"  # 1994
+        expected = 1994
+        result = Solution.romanToInt(s)
+        assert result == expected
+
+    def test_12(self):
+        """Sprawdź, czy rzuca wyjątek przy height=0."""
+        with self.assertRaises(ValueError):
+            Solution.bmi(70, 0)

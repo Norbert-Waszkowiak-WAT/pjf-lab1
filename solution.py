@@ -1,115 +1,148 @@
 class Solution:
     """
     Opracuj program, który zamieni liczbę rzymską na liczbę arabską.
-    Przykład:
-    Input: s = "III"
-    Output: 3
     """
     @staticmethod
     def romanToInt(s: str) -> int:
-        pass
+        values = {
+            "I": 1, "V": 5, "X": 10, "L": 50,
+            "C": 100, "D": 500, "M": 1000
+        }
+        s = s.upper()
+        total = 0
+        i = 0
+        while i < len(s):
+            if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:
+                total += values[s[i + 1]] - values[s[i]]
+                i += 2
+            else:
+                total += values[s[i]]
+                i += 1
+        return total
 
     """
-    Opracuj program FizzBuzz, który zwróci liste stringów od 1 do n.
-    Dla każdego elementu z listy:
-    - jeśli liczba jest podzielna przez 3 zamiast liczby zwróci "Fizz"
-    - jeśli liczba jest podzielna przez 5 zamiast liczby zwróci "Buzz"
-    - jeśli liczba jest podzielna przez 3 i 5 zamiast liczby zwróci "FizzBuzz"
-
-    Przykład:
-    Input: n = 15
-    Output: ["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+    FizzBuzz
     """
     @staticmethod
     def fizzbuzz(n: int) -> list[str]:
-        pass
+        out: list[str] = []
+        for i in range(1, n + 1):
+            if i % 15 == 0:
+                out.append("FizzBuzz")
+            elif i % 3 == 0:
+                out.append("Fizz")
+            elif i % 5 == 0:
+                out.append("Buzz")
+            else:
+                out.append(str(i))
+        return out
 
     """
-    Opracuj program, który obliczy BMI na podstawie wagi i wzrostu.
-    BMI = waga / (wzrost^2)
-    Wynik zaokrąglij do 2 miejsc po przecinku.
-
-    Przykład:
-    Input: weight = 70, height = 1.75
-    Output: 22.86
+    BMI = waga / (wzrost^2), zaokrąglenie do 2 miejsc.
     """
     @staticmethod
     def bmi(weight: float, height: float) -> float:
-        pass
+        if height == 0:
+            raise ValueError("Height cannot be zero.")
+        return round(weight / (height * height), 2)
 
     """
-    Opracuj program, który sprawdzi czy podana liczba jest liczbą pierwszą.
-    Liczba pierwsza to taka liczba, która jest podzielna przez 1 i samą siebie.
-
-    Przykład:
-    Input: n = 7
-    Output: True
+    Sprawdź czy liczba jest pierwsza.
     """
     @staticmethod
     def prime_number(n: int) -> bool:
-        pass
+        if n < 2:
+            return False
+        if n in (2, 3):
+            return True
+        if n % 2 == 0 or n % 3 == 0:
+            return False
+        i = 5
+        while i * i <= n:
+            if n % i == 0 or n % (i + 2) == 0:
+                return False
+            i += 6
+        return True
 
     """
-    Opracuj program, który zliczy ile razy litera występuje w podanym stringu.
-
-    Przykład:
-    Input: s = "hello", letter = "l"
-    Output: 2
+    Policz wystąpienia litery w stringu.
     """
     @staticmethod
     def count_letter_in_string(s: str, letter: str) -> int:
-        pass
+        if len(letter) != 1:
+            raise ValueError("letter must be a single character")
+        return s.count(letter)
 
     """
-    Opracuj program, który zwróci sumę liczb nieparzystych z podanej listy.
-
-    Przykład:
-    Input: n = 10
-    Output: 25
+    Zwróć sumę liczb nieparzystych od 1 do n (włącznie).
+    Przykład: n=10 → 1+3+5+7+9 = 25
     """
     @staticmethod
     def sum_of_odd_numbers(n: int) -> int:
-        pass
+        if n <= 0:
+            return 0
+        k = (n + 1) // 2
+        return k * k
 
     """
-    Opracuj program, który z dwóch podanych list zwróci jedną posortowaną listę, która będzie 
-    zawierała liczby wyłącznie występujące w obu listach.
-
-    Przykład:
-    Input: l1 = [1,2,3,4], l2 = [2,3,4,5]
-    Output: [2,3,4]
+    Część wspólna (posortowana, bez duplikatów).
     """
     @staticmethod
     def inner_join_two_sorted_lists(l1: list[int], l2: list[int]) -> list[int]:
-        pass
+        i = j = 0
+        out: list[int] = []
+        while i < len(l1) and j < len(l2):
+            if l1[i] == l2[j]:
+                if not out or out[-1] != l1[i]:
+                    out.append(l1[i])
+                i += 1
+                j += 1
+            elif l1[i] < l2[j]:
+                i += 1
+            else:
+                j += 1
+        return out
 
     """
-    Opracuj program, który zwróci indeks pierwszego wystąpienia elementu w stringu lub -1 jeśli
-    element nie występuje.
-
-    Przykład:
-    Input: haystack = "hello", needle = "l"
-    Output: 2
-
-    Input: haystack = "hello", needle = "g"
-    Output: -1
+    Zwróć indeks pierwszego wystąpienia (albo -1).
     """
     @staticmethod
     def find_index_of_first_occurrence_of_element_in_string(haystack: str, needle: str) -> int:
-        pass
+        return haystack.find(needle)
 
     """
-    Opracuj program, który z dwóch podanych list zwróci jedną posortowaną listę, która będzie
-    zawierała niepowtarzające się elementy z obu list.
-
-    Przykład:
-    Input: l1 = [1,2,3,4], l2 = [2,3,4,5]
-    Output: [1,5]
+    Suma zbiorów bez części wspólnej (symetryczna różnica), posortowana i bez duplikatów.
+    Dla [1,2,3,4] i [2,3,4,5] → [1,5]
     """
-
     @staticmethod
     def outer_join_two_sorted_lists(l1: list[int], l2: list[int]) -> list[int]:
-        pass
+        i = j = 0
+        out: list[int] = []
+        while i < len(l1) and j < len(l2):
+            if l1[i] == l2[j]:
+                val = l1[i]
+                while i < len(l1) and l1[i] == val:
+                    i += 1
+                while j < len(l2) and l2[j] == val:
+                    j += 1
+            elif l1[i] < l2[j]:
+                if not out or out[-1] != l1[i]:
+                    out.append(l1[i])
+                i += 1
+            else:
+                if not out or out[-1] != l2[j]:
+                    out.append(l2[j])
+                j += 1
+        # dołóż ogony
+        while i < len(l1):
+            if not out or out[-1] != l1[i]:
+                out.append(l1[i])
+            i += 1
+        while j < len(l2):
+            if not out or out[-1] != l2[j]:
+                out.append(l2[j])
+            j += 1
+        return out
 
     class ListNode:
         def __init__(self, x, next=None):
@@ -117,25 +150,14 @@ class Solution:
             self.next = next
 
     """
-    Biorąc pod uwagę "head", nagłówek połączonej listy, określ, czy linked lista ma w sobie cykl.
-    Cykl na linked liście występuje, jeśli na liście znajduje się węzeł, do którego można ponownie dotrzeć poprzez ciągłe podążanie za następnym wskaźnikiem. 
-    Wewnętrznie, "pos" jest używane do oznaczenia indeksu węzła, z którym połączony jest następny wskaźnik tail. Zauważ, że pos nie jest przekazywane jako parametr.
-    Zwraca wartość true, jeśli na połączonej liście istnieje cykl. W przeciwnym razie zwraca false.
-
-    Przykład:
-
-    Input: head = [3,2,0,-4], pos = 1, Patrz obrazek "linked_list_cycle1.png"
-    Output: True
-    Wyjaśnienie: Cykl zaczyna się na drugim elemencie listy i wygląda następująco: 3 -> 2 -> 0 -> -4 -> 2
-
-    Input: head = [1,2], pos = 0, Patrz obrazek "linked_list_cycle2.png"
-    Output: True
-    Wyjaśnienie: Cykl zaczyna się na pierwszym elemencie listy i wygląda następująco: 1 -> 2 -> 1
-
-    Input: head = [1], pos = -1, Patrz obrazek "linked_list_cycle3.png"
-    Output: False
-    Wyjaśnienie: W liście nie ma cyklu.
+    Wykrywanie cyklu w liście jednokierunkowej (Floyd tortoise & hare).
     """
     @staticmethod
-    def linked_list_cycle(head: ListNode) -> bool:
-        pass
+    def linked_list_cycle(head: "Solution.ListNode") -> bool:
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow is fast:
+                return True
+        return False
