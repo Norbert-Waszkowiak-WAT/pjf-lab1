@@ -14,3 +14,4 @@
 - _python -m unittest -k TestZad8_
 - _python -m unittest -k TestZad9_
 - _python -m unittest -k TestZad0_
+- python -m unittest -k TestZad1_Extra
