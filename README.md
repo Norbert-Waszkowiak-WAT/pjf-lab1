@@ -14,6 +14,4 @@
 - _python -m unittest -k TestZad8_
 - _python -m unittest -k TestZad9_
 - _python -m unittest -k TestZad0_
-
-### Dodatkowy test całości
-python -m unittest test_smoke.py
+- python -m unittest -k TestZad1_Extra
